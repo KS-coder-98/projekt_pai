@@ -18,6 +18,7 @@ public class Receive extends Thread{
     public void run() {
         try {
             Message inputLine;
+            System.out.println("CZeka!!!!!!!!!!!!!!");
             while ((inputLine = (Message) in.readObject()) != null) {
                 inputLine.processing();
             }

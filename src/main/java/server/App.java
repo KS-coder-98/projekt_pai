@@ -6,34 +6,29 @@ import settings.Setting;
 import server.service.communication.EchoMultiServer;
 
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class App {
 
     public static void main(String[] args) throws Exception {
-//        new EchoMultiServer(Setting.port);
-//        Thread communicationThread = new Thread(EchoMultiServer::run);
-//        communicationThread.setDaemon(true);
-//        communicationThread.start();
-//        System.out.printf("stop!!!");
-//        int i = 0;
-//        while (true){
-//            System.out.printf(i+"");
-//            try {
-//                Thread.sleep(10000);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//        }
+        UserParsers userParser = new UserParsers();
+        List<User> readDatabase = userParser.readDatabase("src/main/resources/database.xml");
+        List<User> list = Collections.synchronizedList(readDatabase);
+        userParser.saveDatabase(readDatabase, "src/main/resources/database1.xml");
 
-        UserParsers read = new UserParsers();
-        List<User> readDatabase = read.readDatabase("src/main/resources/database.xml");
-        System.out.println(readDatabase.size());
-//        for (User user : readDatabase) {
-//            read.saveDatabase();
-//        }
-        read.saveDatabase(readDatabase, "src/main/resources/database1.xml");
-
-
+        new EchoMultiServer(Setting.port);
+        Thread communicationThread = new Thread(EchoMultiServer::run);
+        communicationThread.setDaemon(true);
+        communicationThread.start();
+        int i = 0;
+        while (true){
+            try {
+                Thread.sleep(10000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

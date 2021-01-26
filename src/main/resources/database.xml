@@ -2,6 +2,7 @@
 <database>
     <user>
         <id>e077996a-5f70-11eb-ae93-0242ac130002</id>
+        <login>user1_login</login>
         <name>user1_name</name>
         <surname>user1_surname</surname>
         <mail>user1_mail@wp.pl</mail>
@@ -10,6 +11,7 @@
     </user>
     <user>
         <id>e077996a-5f70-11eb-ae93-0242ac130003</id>
+        <login>user2_login</login>
         <name>user2_name</name>
         <surname>user2_surname</surname>
         <mail>user2_mail@wp.pl</mail>

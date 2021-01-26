@@ -16,6 +16,7 @@ import java.util.UUID;
 public class UserParsers {
     static final String USER = "user";
     static final String ID = "id";
+    static final String LOGIN = "login";
     static final String NAME = "name";
     static final String SURNAME = "surname";
     static final String MAIL = "mail";
@@ -44,6 +45,10 @@ public class UserParsers {
                     switch (elementName) {
                         case USER:
                             user = new User();
+                            break;
+                        case LOGIN:
+                            event = eventReader.nextEvent();
+                            user.setLogin(event.asCharacters().getData());
                             break;
                         case ID:
                             event = eventReader.nextEvent();
@@ -110,6 +115,7 @@ public class UserParsers {
             createStartNode(eventWriter, eventFactory, USER);
             eventWriter.add(end);
             createNode(eventWriter, ID, user.getId().toString(), eventFactory);
+            createNode(eventWriter, LOGIN, user.getLogin(), eventFactory);
             createNode(eventWriter, NAME, user.getName(), eventFactory);
             createNode(eventWriter, SURNAME, user.getSurname(), eventFactory);
             createNode(eventWriter, MAIL, user.getMail(), eventFactory);

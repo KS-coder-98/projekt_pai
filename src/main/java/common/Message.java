@@ -12,6 +12,7 @@ import java.io.Serializable;
 public abstract class Message implements Serializable {
 
     private String login;
+    private String Password;
     private String name;
     private String surname;
     private String mail;

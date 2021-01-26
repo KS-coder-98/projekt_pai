@@ -31,6 +31,7 @@ public class EchoClientHandler extends Thread{
         try {
             msgList = Collections.synchronizedList(new ArrayList<>());
             msgListReceive = Collections.synchronizedList(new ArrayList<>());
+            send = new Send(new ObjectOutputStream(socket.getOutputStream()), msgList);
             receive = new Receive(new ObjectInputStream(socket.getInputStream()), msgListReceive);
             try {
                 var msg = (Message)receive.getIn().readObject();
@@ -39,7 +40,6 @@ public class EchoClientHandler extends Thread{
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }
-            send = new Send(new ObjectOutputStream(socket.getOutputStream()), msgList);
         } catch (IOException e) {
             e.printStackTrace();
         }
