@@ -10,13 +10,15 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class App {
+public class AppServer {
+    public static List<User> list;
+    public static UserParsers userParser = new UserParsers();
+
 
     public static void main(String[] args) throws Exception {
-        UserParsers userParser = new UserParsers();
-        List<User> readDatabase = userParser.readDatabase("src/main/resources/database.xml");
-        List<User> list = Collections.synchronizedList(readDatabase);
-        userParser.saveDatabase(readDatabase, "src/main/resources/database1.xml");
+        List<User> readDatabase = userParser.readDatabase(Setting.databaseName);
+        list = Collections.synchronizedList(readDatabase);
+//        userParser.saveDatabase(readDatabase, Setting.databaseName);
 
         new EchoMultiServer(Setting.port);
         Thread communicationThread = new Thread(EchoMultiServer::run);

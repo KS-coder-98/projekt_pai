@@ -3,6 +3,7 @@ package common;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import server.service.communication.Send;
 
 import java.io.Serializable;
 
@@ -22,5 +23,5 @@ public abstract class Message implements Serializable {
     private Sender sender;
     private Status status;
 
-    public abstract void processing();
+    public abstract void processing(Send send);
 }

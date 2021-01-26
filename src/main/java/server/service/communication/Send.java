@@ -50,4 +50,8 @@ public class Send extends Thread{
                 }
         }
     }
+
+    public void addMessageToQueue(Message msg){
+        msgList.add(msg);
+    }
 }

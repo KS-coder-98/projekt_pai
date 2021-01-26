@@ -17,7 +17,6 @@ import java.util.List;
 public class EchoClientHandler extends Thread{
     private Receive receive;
     private Send send;
-    private String login;
     private List<Message> msgList;
     private List<Message> msgListReceive;
 
@@ -32,14 +31,7 @@ public class EchoClientHandler extends Thread{
             msgList = Collections.synchronizedList(new ArrayList<>());
             msgListReceive = Collections.synchronizedList(new ArrayList<>());
             send = new Send(new ObjectOutputStream(socket.getOutputStream()), msgList);
-            receive = new Receive(new ObjectInputStream(socket.getInputStream()), msgListReceive);
-            try {
-                var msg = (Message)receive.getIn().readObject();
-                login = msg.getLogin();
-                msg.processing();
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            }
+            receive = new Receive(new ObjectInputStream(socket.getInputStream()), msgListReceive, send);
         } catch (IOException e) {
             e.printStackTrace();
         }

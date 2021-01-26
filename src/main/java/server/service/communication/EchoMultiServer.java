@@ -14,7 +14,6 @@ public class EchoMultiServer{
     public EchoMultiServer(int port){
         EchoMultiServer.port = port;
         listUser = new ArrayList<>();
-
     }
 
     public static void run() {

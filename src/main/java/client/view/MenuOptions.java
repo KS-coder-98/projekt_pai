@@ -1,7 +1,6 @@
 package client.view;
 
-import client.App;
-import client.service.communication.Send;
+import client.AppClient;
 import common.Message;
 
 import java.util.HashMap;
@@ -11,11 +10,12 @@ public enum MenuOptions {
     LOGIN(1) {
         @Override
         public void makeAction(Message message) {
-            App.client.getSend().addMessageToQueue(message);
+            AppClient.client.getSend().addMessageToQueue(message);
         };
     }, REGISTER(2){
         @Override
         public void makeAction(Message message) {
+            AppClient.client.getSend().addMessageToQueue(message);
         };
     }, CHANGE_PASSWORD(3){
         @Override
@@ -24,6 +24,13 @@ public enum MenuOptions {
     }, REMIND_PASSWORD(4){
         @Override
         public void makeAction(Message message) {
+            AppClient.client.getSend().addMessageToQueue(message);
+        };
+    },LOG_OUT(5){
+        //todo popraw to
+        @Override
+        public void makeAction(Message message) {
+            AppClient.client.getSend().addMessageToQueue(message);
         };
     };
 

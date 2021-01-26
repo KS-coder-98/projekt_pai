@@ -13,6 +13,7 @@ import java.util.List;
 @Setter
 public class Receive extends Thread {
     private ObjectInputStream in;
+    private Send send;
     List<Message> msgList; //todo check this now use useless
 
 
@@ -22,9 +23,10 @@ public class Receive extends Thread {
      * @param in      It's object stream input  for specific client. This parameter is responsible for receiving metadata message from client
      * @param msgList List which stores necessary metadata message from client
      */
-    public Receive(ObjectInputStream in, List<Message> msgList) {
+    public Receive(ObjectInputStream in, List<Message> msgList, Send send) {
         this.in = in;
         this.msgList = msgList;
+        this.send = send;
     }
 
 
@@ -35,7 +37,7 @@ public class Receive extends Thread {
         Message inputObject;
         try {
             while ((inputObject = (Message) in.readObject()) != null) {
-                inputObject.processing();
+                inputObject.processing(send);
             }
         } catch (ClassNotFoundException | IOException e) {
             e.printStackTrace();

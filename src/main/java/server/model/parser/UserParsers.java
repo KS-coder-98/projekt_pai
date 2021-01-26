@@ -20,6 +20,7 @@ public class UserParsers {
     static final String NAME = "name";
     static final String SURNAME = "surname";
     static final String MAIL = "mail";
+    static final String PASSWORD = "password";
     static final String CONTROL_QUESTION = "controlQuestion";
     static final String ANSWER_CONTROL_QUESTION = "answerControlQuestion";
 
@@ -43,37 +44,39 @@ public class UserParsers {
                     // If we have an item element, we create a new item
                     String elementName = startElement.getName().getLocalPart();
                     switch (elementName) {
-                        case USER:
-                            user = new User();
-                            break;
-                        case LOGIN:
+                        case USER -> user = new User();
+                        case LOGIN -> {
                             event = eventReader.nextEvent();
                             user.setLogin(event.asCharacters().getData());
-                            break;
-                        case ID:
+                        }
+                        case PASSWORD -> {
+                            event = eventReader.nextEvent();
+                            user.setPassword(event.asCharacters().getData());
+                        }
+                        case ID -> {
                             event = eventReader.nextEvent();
                             user.setId(UUID.fromString(event.asCharacters().getData()));
-                            break;
-                        case NAME:
+                        }
+                        case NAME -> {
                             event = eventReader.nextEvent();
                             user.setName(event.asCharacters().getData());
-                            break;
-                        case SURNAME:
+                        }
+                        case SURNAME -> {
                             event = eventReader.nextEvent();
                             user.setSurname(event.asCharacters().getData());
-                            break;
-                        case MAIL:
+                        }
+                        case MAIL -> {
                             event = eventReader.nextEvent();
                             user.setMail(event.asCharacters().getData());
-                            break;
-                        case CONTROL_QUESTION:
+                        }
+                        case CONTROL_QUESTION -> {
                             event = eventReader.nextEvent();
                             user.setControlQuestion(event.asCharacters().getData());
-                            break;
-                        case ANSWER_CONTROL_QUESTION:
+                        }
+                        case ANSWER_CONTROL_QUESTION -> {
                             event = eventReader.nextEvent();
                             user.setAnswerControlQuestion(event.asCharacters().getData());
-                            break;
+                        }
                     }
                 }
 //                     If we reach the end of an item element, we add it to the list
@@ -117,6 +120,7 @@ public class UserParsers {
             createNode(eventWriter, ID, user.getId().toString(), eventFactory);
             createNode(eventWriter, LOGIN, user.getLogin(), eventFactory);
             createNode(eventWriter, NAME, user.getName(), eventFactory);
+            createNode(eventWriter, PASSWORD, user.getPassword(), eventFactory);
             createNode(eventWriter, SURNAME, user.getSurname(), eventFactory);
             createNode(eventWriter, MAIL, user.getMail(), eventFactory);
             createNode(eventWriter, CONTROL_QUESTION, user.getControlQuestion(), eventFactory);
