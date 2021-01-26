@@ -1,6 +1,5 @@
-package common;
+package settings;
 
-import lombok.Getter;
 
 public class Setting {
     public final static int port = 5555;

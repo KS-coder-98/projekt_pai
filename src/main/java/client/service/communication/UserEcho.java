@@ -1,6 +1,5 @@
-package client.model;
+package client.service.communication;
 
-import client.service.communication.EchoClient;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -8,7 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class User {
+public class UserEcho {
     private static EchoClient echoClient;
 
     public static EchoClient getEchoClient() {
@@ -16,6 +15,6 @@ public class User {
     }
 
     public static void setEchoClient(EchoClient echoClient) {
-        User.echoClient = echoClient;
+        UserEcho.echoClient = echoClient;
     }
 }

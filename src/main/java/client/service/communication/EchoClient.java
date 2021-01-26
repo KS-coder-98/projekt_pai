@@ -6,7 +6,6 @@ import common.Message;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.OutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -30,7 +29,8 @@ public class EchoClient {
         }
         try {
             out = new ObjectOutputStream(clientSocket.getOutputStream());
-            msgList.add(new LoginMessage("test", "password"));
+            //todo this add message to queue
+//            msgList.add(new LoginMessage("test", "password"));
             send = new Send(out, msgList);
             send.start();
 

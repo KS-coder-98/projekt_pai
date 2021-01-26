@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database>
+    <user>
+        <id>e077996a-5f70-11eb-ae93-0242ac130002</id>
+        <name>user1_name</name>
+        <surname>user1_surname</surname>
+        <mail>user1_mail@wp.pl</mail>
+        <controlQuestion>user1_questions</controlQuestion>
+        <answerControlQuestion>user1_answer</answerControlQuestion>
+    </user>
+    <user>
+        <id>e077996a-5f70-11eb-ae93-0242ac130003</id>
+        <name>user2_name</name>
+        <surname>user2_surname</surname>
+        <mail>user2_mail@wp.pl</mail>
+        <controlQuestion>user2_questions</controlQuestion>
+        <answerControlQuestion>user2_answer</answerControlQuestion>
+    </user>
+</database>
