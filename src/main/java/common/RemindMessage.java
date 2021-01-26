@@ -7,8 +7,8 @@ import server.model.User;
 import server.service.communication.Send;
 
 public class RemindMessage extends Message {
-    public RemindMessage(String login, String Password, String name, String surname, String mail, String controlQuestion, String answerControlQuestion, String searchedPhrase, Sender sender, Status status) {
-        super(login, Password, name, surname, mail, controlQuestion, answerControlQuestion, searchedPhrase, sender, status);
+    public RemindMessage(String login, String Password, String name, String surname, String mail, String controlQuestion, String answerControlQuestion, String searchedPhrase, Sender sender, Status status, String newPassword) {
+        super(login, Password, name, surname, mail, controlQuestion, answerControlQuestion, searchedPhrase, sender, status, newPassword);
     }
 
     @Override
@@ -21,19 +21,19 @@ public class RemindMessage extends Message {
             if (userPresent) {
                 User foundUser = AppServer.list.stream().filter(user -> user.getLogin().equals(getLogin())).findFirst().get();
                 if (getStatus() == Status.CONTROL_QUESTION) {
-                    remindMessage = new RemindMessage(foundUser.getLogin(), null, null, null, null, foundUser.getControlQuestion(), null, null, Sender.Server, Status.CONTROL_QUESTION);
+                    remindMessage = new RemindMessage(foundUser.getLogin(), null, null, null, null, foundUser.getControlQuestion(), null, null, Sender.Server, Status.CONTROL_QUESTION, null);
                 }
                 else if (getStatus() == Status.ANSWER_TO_CONTROL_QUESTION && foundUser.getAnswerControlQuestion().equals(getAnswerControlQuestion())) {
-                    remindMessage = new RemindMessage(foundUser.getLogin(), foundUser.getPassword(), null, null, null, null, null, null, Sender.Server, Status.REMIND_PASSWORD_OK);
+                    remindMessage = new RemindMessage(foundUser.getLogin(), foundUser.getPassword(), null, null, null, null, null, null, Sender.Server, Status.REMIND_PASSWORD_OK, null);
                 } else {
-                    remindMessage = new RemindMessage(foundUser.getLogin(), null, null, null, null, null, null, null, Sender.Server, Status.REMIND_PASSWORD_ERROR);
+                    remindMessage = new RemindMessage(foundUser.getLogin(), null, null, null, null, null, null, null, Sender.Server, Status.REMIND_PASSWORD_ERROR, null);
                 }
                 send.addMessageToQueue(remindMessage);
             }
         } else if (getSender() == Sender.Server) {
             if (getStatus() == Status.CONTROL_QUESTION) {
                 String answer = UI.answerToControlQuestion(getControlQuestion());
-                remindMessage = new RemindMessage(getLogin(), null, null, null, null, null, answer, null, Sender.Client, Status.ANSWER_TO_CONTROL_QUESTION);
+                remindMessage = new RemindMessage(getLogin(), null, null, null, null, null, answer, null, Sender.Client, Status.ANSWER_TO_CONTROL_QUESTION, null);
                 AppClient.client.getSend().addMessageToQueue(remindMessage);
             }else if (getStatus() == Status.REMIND_PASSWORD_OK){
                 UI.showPassword(getPassword());

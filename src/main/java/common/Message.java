@@ -22,6 +22,7 @@ public abstract class Message implements Serializable {
     private String searchedPhrase;
     private Sender sender;
     private Status status;
+    private String newPassword;
 
     public abstract void processing(Send send);
 }

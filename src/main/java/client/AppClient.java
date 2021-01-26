@@ -11,7 +11,7 @@ public class AppClient {
 
         client.startConnection(Setting.ip, Setting.port);
         UI.showMenu();
-        UI.choseOptionNotLogIn();
+        UI.choseOption();
         int i = 0;
         while (true){
             try {

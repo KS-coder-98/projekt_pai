@@ -11,27 +11,34 @@ public enum MenuOptions {
         @Override
         public void makeAction(Message message) {
             AppClient.client.getSend().addMessageToQueue(message);
-        };
-    }, REGISTER(2){
+        }
+    }, REGISTER(2) {
         @Override
         public void makeAction(Message message) {
             AppClient.client.getSend().addMessageToQueue(message);
-        };
-    }, CHANGE_PASSWORD(3){
-        @Override
-        public void makeAction(Message message) {
-        };
-    }, REMIND_PASSWORD(4){
+        }
+    }, CHANGE_PASSWORD(3) {
         @Override
         public void makeAction(Message message) {
             AppClient.client.getSend().addMessageToQueue(message);
-        };
-    },LOG_OUT(5){
+        }
+    }, REMIND_PASSWORD(4) {
+        @Override
+        public void makeAction(Message message) {
+            AppClient.client.getSend().addMessageToQueue(message);
+        }
+    }, LOG_OUT(5) {
+        //todo popraw to
+        @Override
+        public void makeAction(Message message) {
+
+        }
+    }, SEARCH_BY_PHRASE(6) {
         //todo popraw to
         @Override
         public void makeAction(Message message) {
             AppClient.client.getSend().addMessageToQueue(message);
-        };
+        }
     };
 
 
