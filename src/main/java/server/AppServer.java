@@ -2,6 +2,7 @@ package server;
 
 import server.model.User;
 import server.model.parser.UserParsers;
+import server.model.xmlSearch.XPathBookService;
 import settings.Setting;
 import server.service.communication.EchoMultiServer;
 
@@ -32,5 +33,8 @@ public class AppServer {
                 e.printStackTrace();
             }
         }
+//        XPathBookService xPathBookService = new XPathBookService(Setting.databaseBooks);
+////        xPathBookService.getBooksByYear(1995);
+//        xPathBookService.getBooksByAuthor("Larry Niven");
     }
 }
