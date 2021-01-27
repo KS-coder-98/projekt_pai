@@ -9,6 +9,8 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.*;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class XPathBookService {
     private DocumentBuilderFactory factory;
@@ -27,22 +29,40 @@ public class XPathBookService {
         }
     }
 
-    public NodeList getBooksByYear(int year) throws XPathExpressionException {
+    public List<String> getBooksByYear(int year)  {
         XPathFactory xpathfactory = XPathFactory.newInstance();
         XPath xpath = xpathfactory.newXPath();
-        XPathExpression expr = xpath.compile("//book[@year='" + year + "']/title/text()");
-        return getNodeList(expr);
+        XPathExpression expr = null;
+        System.err.println(year);
+        try {
+            expr = xpath.compile("//book[@year='" + year + "']/title/text()");
+            return getNodeList(expr);
+        } catch (XPathExpressionException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
-    public NodeList getBooksByAuthor(String author) throws XPathExpressionException {
+    public List<String> getBooksByAuthor(String author) {
         XPathFactory xpathfactory = XPathFactory.newInstance();
         XPath xpath = xpathfactory.newXPath();
-        XPathExpression expr = xpath.compile("//book[author='" + author + "']/title/text()");
-        return getNodeList(expr);
+        try{
+            XPathExpression expr = xpath.compile("//book[author='" + author + "']/title/text()");
+            return getNodeList(expr);
+        }catch (XPathExpressionException e){
+            e.printStackTrace();
+        }
+        return null;
     }
 
-    private NodeList getNodeList(XPathExpression expr) throws XPathExpressionException {
+    private List<String> getNodeList(XPathExpression expr) throws XPathExpressionException {
         Object result = expr.evaluate(doc, XPathConstants.NODESET);
-        return (NodeList) result;
+        NodeList nodeList = (NodeList) result;
+        List<String> booksList = new ArrayList<>();
+        for (int i = 0; i < nodeList.getLength(); i++) {
+            booksList.add(nodeList.item(i).getNodeValue());
+            System.out.println(nodeList.item(i).getNodeValue());
+        }
+        return booksList;
     }
 }

@@ -33,8 +33,12 @@ public enum MenuOptions {
         public void makeAction(Message message) {
 
         }
-    }, SEARCH_BY_PHRASE(6) {
-        //todo popraw to
+    }, SEARCH_BY_YEAR(6) {
+        @Override
+        public void makeAction(Message message) {
+            AppClient.client.getSend().addMessageToQueue(message);
+        }
+    }, SEARCH_BY_AUTHOR(7) {
         @Override
         public void makeAction(Message message) {
             AppClient.client.getSend().addMessageToQueue(message);

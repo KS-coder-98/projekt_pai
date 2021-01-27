@@ -1,14 +1,17 @@
 package common;
 
 import client.view.UI;
+import org.w3c.dom.NodeList;
 import server.AppServer;
 import server.model.User;
 import server.service.communication.Send;
 import settings.Setting;
 
+import java.util.List;
+
 public class ChangePasswordMessage extends Message{
-    public ChangePasswordMessage(String login, String Password, String name, String surname, String mail, String controlQuestion, String answerControlQuestion, String searchedPhrase, Sender sender, Status status, String newPassword) {
-        super(login, Password, name, surname, mail, controlQuestion, answerControlQuestion, searchedPhrase, sender, status, newPassword);
+    public ChangePasswordMessage(String login, String Password, String name, String surname, String mail, String controlQuestion, String answerControlQuestion, String searchedPhrase, Sender sender, Status status, String newPassword, List<String> bookLists, String query) {
+        super(login, Password, name, surname, mail, controlQuestion, answerControlQuestion, searchedPhrase, sender, status, newPassword, bookLists, query);
     }
 
     @Override
@@ -23,17 +26,17 @@ public class ChangePasswordMessage extends Message{
                     foundUser.setPassword(getNewPassword());
                     AppServer.list.removeIf(user -> user.getLogin().equals(foundUser.getLogin()));
                     AppServer.list.add(foundUser);
-                    changePasswordMessage = new ChangePasswordMessage(null, null, null, null, null, null, null, null, Sender.Server, Status.OK, null);
+                    changePasswordMessage = new ChangePasswordMessage(null, null, null, null, null, null, null, null, Sender.Server, Status.OK, null, null, null);
                     try {
                         AppServer.userParser.saveDatabase(AppServer.list, Setting.databaseName);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }else{
-                    changePasswordMessage = new ChangePasswordMessage(null, null, null, null, null, null, null, null, Sender.Server, Status.ERROR, null);
+                    changePasswordMessage = new ChangePasswordMessage(null, null, null, null, null, null, null, null, Sender.Server, Status.ERROR, null, null, null);
                 }
             }else{
-                changePasswordMessage = new ChangePasswordMessage(null, null, null, null, null, null, null, null, Sender.Server, Status.ERROR, null);
+                changePasswordMessage = new ChangePasswordMessage(null, null, null, null, null, null, null, null, Sender.Server, Status.ERROR, null, null, null);
             }
             sender.addMessageToQueue(changePasswordMessage);
         } else if(getSender() == Sender.Server){

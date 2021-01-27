@@ -1,6 +1,10 @@
 package client.view;
 
 import common.*;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
+import java.util.List;
 
 public class UI {
 
@@ -15,6 +19,8 @@ public class UI {
     public static void showMenuLogged() {
         System.out.println("Log out -> " + MenuOptions.LOG_OUT.getValue());
         System.out.println("Change password -> " + MenuOptions.CHANGE_PASSWORD.getValue());
+        System.out.println("Find books by year ->" + MenuOptions.SEARCH_BY_YEAR.getValue());
+        System.out.println("Find books by author ->" + MenuOptions.SEARCH_BY_AUTHOR.getValue());
     }
 
     public static void logged() {
@@ -40,11 +46,63 @@ public class UI {
             signUp();
         } else if (menuOptions == MenuOptions.REMIND_PASSWORD && !isLogIn) {
             askAboutControlQuestion();
+        } else if (menuOptions == MenuOptions.SEARCH_BY_YEAR && isLogIn) {
+            searchByYear();
+        } else if (menuOptions == MenuOptions.SEARCH_BY_AUTHOR && isLogIn) {
+            searchByAuthor();
         } else if (menuOptions == MenuOptions.LOG_OUT && isLogIn) {
             noLogIn();
         } else if (menuOptions == MenuOptions.CHANGE_PASSWORD && isLogIn) {
             changePassword();
+        } else {
+            if (isLogIn) {
+                logged();
+            } else {
+                noLogIn();
+            }
         }
+    }
+
+    private static void searchByAuthor() {
+        System.out.println("Input author");
+        String author = Input.readLine();
+        QueryMessage queryMessage = new QueryMessage(
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                Sender.Client,
+                Status.FIND_BY_AUTHOR_REQUEST,
+                null,
+                null,
+                author
+        );
+        MenuOptions.SEARCH_BY_AUTHOR.makeAction(queryMessage);
+    }
+
+    private static void searchByYear() {
+        System.out.println("Input year");
+        String year = Input.readLine();
+        QueryMessage queryMessage = new QueryMessage(
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                Sender.Client,
+                Status.FIND_BY_YEAR_REQUEST,
+                null,
+                null,
+                year
+        );
+        MenuOptions.SEARCH_BY_YEAR.makeAction(queryMessage);
     }
 
     public static void changedPasswordOK() {
@@ -64,7 +122,7 @@ public class UI {
         String oldPassword = Input.readLine();
         System.out.println("Input new password");
         String newPassword = Input.readLine();
-        Message msg = new ChangePasswordMessage(login, oldPassword, null, null, null, null, null, null, Sender.Client, null, newPassword);
+        Message msg = new ChangePasswordMessage(login, oldPassword, null, null, null, null, null, null, Sender.Client, null, newPassword, null, null);
         MenuOptions.CHANGE_PASSWORD.makeAction(msg);
     }
 
@@ -73,8 +131,20 @@ public class UI {
         String login = Input.readLine();
         System.out.println("Input password");
         String password = Input.readLine();
-        Message msg = new LoginMessage(login, password, null, null, null,
-                null, null, null, Sender.Client, null, null);
+        Message msg = new LoginMessage(
+                login,
+                password,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                Sender.Client,
+                null,
+                null,
+                null,
+                null);
         MenuOptions.LOGIN.makeAction(msg);
     }
 
@@ -93,7 +163,7 @@ public class UI {
         String controlQuestion = Input.readLine();
         System.out.println("Input control answer to control question");
         String answerControlQuestion = Input.readLine();
-        Message msg = new RegistrationMessage(login, password, name, surname, mail, controlQuestion, answerControlQuestion, null, Sender.Client, null, null);
+        Message msg = new RegistrationMessage(login, password, name, surname, mail, controlQuestion, answerControlQuestion, null, Sender.Client, null, null, null, null);
         MenuOptions.REGISTER.makeAction(msg);
     }
 
@@ -111,12 +181,22 @@ public class UI {
         System.out.println("Input login");
         String login = Input.readLine();
         Message msg = new RemindMessage(login, null, null, null, null,
-                null, null, null, Sender.Client, Status.CONTROL_QUESTION, null);
+                null, null, null, Sender.Client, Status.CONTROL_QUESTION, null, null, null);
         MenuOptions.REMIND_PASSWORD.makeAction(msg);
     }
 
     public static void showErrorRemindPassword() {
         System.out.println("Wrong answer");
         noLogIn();
+    }
+
+    public static void findBySth(List<String> nodeList) {
+        if (nodeList != null && nodeList.size() != 0) {
+            System.out.println("Books:");
+            nodeList.forEach(System.out::println);
+        } else {
+            System.out.println("Nothing to show");
+        }
+        logged();
     }
 }

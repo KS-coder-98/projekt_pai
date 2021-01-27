@@ -3,6 +3,7 @@ package common;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import org.w3c.dom.NodeList;
 import server.service.communication.Send;
 
 import java.io.Serializable;
@@ -25,7 +26,7 @@ public abstract class Message implements Serializable {
     private Status status;
     private String newPassword;
     private List<String> bookLists;
-    //todo lista ksiazek
+    private String query;
 
     public abstract void processing(Send send);
 }
