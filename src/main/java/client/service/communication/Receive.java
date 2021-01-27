@@ -19,7 +19,6 @@ public class Receive extends Thread{
         try {
             Message inputLine;
             while ((inputLine = (Message) in.readObject()) != null) {
-                //todo waring null
                 inputLine.processing(null);
             }
         } catch (IOException | ClassNotFoundException e) {

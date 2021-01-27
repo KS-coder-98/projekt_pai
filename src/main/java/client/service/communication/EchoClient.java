@@ -35,8 +35,6 @@ public class EchoClient extends Thread{
         }
         try {
             out = new ObjectOutputStream(clientSocket.getOutputStream());
-            //todo this add message to queue
-//            msgList.add(new LoginMessage("test", "password"));
             send = new Send(out, msgList);
             send.start();
 

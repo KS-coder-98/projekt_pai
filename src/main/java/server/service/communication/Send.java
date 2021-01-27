@@ -21,13 +21,6 @@ public class Send extends Thread{
         try {
             out.writeObject(msg);
             out.flush();
-            //todo check this
-//            if ( msg instanceof FileMessage){
-//                LambdaExpression.actionIf(EchoMultiServer.getListUser(),
-//                        handler -> handler.getSendFile().sendFile(Path.of( msg.getPath()), msg.getId(), msg.getLogin()),
-//                        handler->handler.getLogin().equals(msg.getLogin())
-//                );
-//            }
         } catch (IOException e) {
             e.printStackTrace();
         }

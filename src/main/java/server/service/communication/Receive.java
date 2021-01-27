@@ -14,7 +14,7 @@ import java.util.List;
 public class Receive extends Thread {
     private ObjectInputStream in;
     private Send send;
-    List<Message> msgList; //todo check this now use useless
+    List<Message> msgList;
 
 
     /**

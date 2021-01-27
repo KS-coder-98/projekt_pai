@@ -28,7 +28,6 @@ public enum MenuOptions {
             AppClient.client.getSend().addMessageToQueue(message);
         }
     }, LOG_OUT(5) {
-        //todo popraw to
         @Override
         public void makeAction(Message message) {
 

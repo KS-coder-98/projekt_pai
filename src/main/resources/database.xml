@@ -44,7 +44,7 @@
 		<id>1b1b9f2c-0006-4c76-b321-b53204084a32</id>
 		<login>1</login>
 		<name>1</name>
-		<password>kopecDzila</password>
+		<password>1</password>
 		<surname>1</surname>
 		<mail>1</mail>
 		<controlQuestion>1</controlQuestion>
@@ -54,7 +54,7 @@
 		<id>265e4262-1645-4085-9f8b-ab86a6d0715e</id>
 		<login>7</login>
 		<name>7</name>
-		<password>kopec</password>
+		<password>7</password>
 		<surname>7</surname>
 		<mail>7</mail>
 		<controlQuestion>7</controlQuestion>
@@ -64,7 +64,7 @@
 		<id>029bdb01-ecaf-4408-812d-a569d047c2e0</id>
 		<login>9</login>
 		<name>9</name>
-		<password>99</password>
+		<password>9</password>
 		<surname>9</surname>
 		<mail>9</mail>
 		<controlQuestion>9</controlQuestion>
