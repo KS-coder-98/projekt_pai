@@ -13,7 +13,7 @@ public class AppClient {
         UI.showMenu();
         UI.choseOption();
         int i = 0;
-        while (true){
+        while (true) {
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {

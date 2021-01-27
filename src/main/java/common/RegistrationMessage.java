@@ -20,16 +20,16 @@ public class RegistrationMessage extends Message {
 
     @Override
     public void processing(Send send) {
-        if ( getSender() == Sender.Client ){
+        if (getSender() == Sender.Client) {
             Boolean userPresent = AppServer.list.stream()
                     .anyMatch(user -> user.getLogin().equals(getLogin()));
             RegistrationMessage registrationMessage;
-            if ( userPresent ){
+            if (userPresent) {
                 registrationMessage = new RegistrationMessage(null, null, null, null, null, null, null, null, Sender.Server, Status.ERROR_USER_ALREADY_EXIST, null, null, null);
                 send.addMessageToQueue(registrationMessage);
-            }else{
+            } else {
                 registrationMessage = new RegistrationMessage(null, null, null, null, null, null, null, null, Sender.Server, Status.OK, null, null, null);
-                UUID id =  UUID.randomUUID();
+                UUID id = UUID.randomUUID();
                 AppServer.list.add(new User(id, getLogin(), getName(), getSurname(), getMail(), getPassword(), getControlQuestion(), getAnswerControlQuestion()));
                 send.addMessageToQueue(registrationMessage);
                 try {
@@ -38,10 +38,10 @@ public class RegistrationMessage extends Message {
                     e.printStackTrace();
                 }
             }
-        }else if(getSender() == Sender.Server){
-            if ( getStatus() == Status.OK ){
+        } else if (getSender() == Sender.Server) {
+            if (getStatus() == Status.OK) {
                 System.out.println("Added user");
-            }else if(getStatus() == Status.ERROR_USER_ALREADY_EXIST){
+            } else if (getStatus() == Status.ERROR_USER_ALREADY_EXIST) {
                 System.out.println("User with this login already existed");
             }
             UI.noLogIn();

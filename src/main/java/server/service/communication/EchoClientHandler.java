@@ -12,9 +12,8 @@ import java.util.List;
 
 /**
  * This class implements handle for a client and it is extended by Thread interface. This class stores data about client
- *
  */
-public class EchoClientHandler extends Thread{
+public class EchoClientHandler extends Thread {
     private Receive receive;
     private Send send;
     private List<Message> msgList;

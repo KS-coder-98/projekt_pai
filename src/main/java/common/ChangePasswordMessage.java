@@ -9,7 +9,7 @@ import settings.Setting;
 
 import java.util.List;
 
-public class ChangePasswordMessage extends Message{
+public class ChangePasswordMessage extends Message {
     public ChangePasswordMessage(String login, String Password, String name, String surname, String mail, String controlQuestion, String answerControlQuestion, String searchedPhrase, Sender sender, Status status, String newPassword, List<String> bookLists, String query) {
         super(login, Password, name, surname, mail, controlQuestion, answerControlQuestion, searchedPhrase, sender, status, newPassword, bookLists, query);
     }
@@ -20,9 +20,9 @@ public class ChangePasswordMessage extends Message{
             Boolean userPresent = AppServer.list.stream()
                     .anyMatch(user -> user.getLogin().equals(getLogin()) && user.getPassword().equals(getPassword()));
             ChangePasswordMessage changePasswordMessage;
-            if ( userPresent ){
+            if (userPresent) {
                 User foundUser = AppServer.list.stream().filter(user -> user.getLogin().equals(getLogin())).findFirst().get();
-                if ( foundUser.getPassword().equals(getPassword()) ){
+                if (foundUser.getPassword().equals(getPassword())) {
                     foundUser.setPassword(getNewPassword());
                     AppServer.list.removeIf(user -> user.getLogin().equals(foundUser.getLogin()));
                     AppServer.list.add(foundUser);
@@ -32,17 +32,17 @@ public class ChangePasswordMessage extends Message{
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                }else{
+                } else {
                     changePasswordMessage = new ChangePasswordMessage(null, null, null, null, null, null, null, null, Sender.Server, Status.ERROR, null, null, null);
                 }
-            }else{
+            } else {
                 changePasswordMessage = new ChangePasswordMessage(null, null, null, null, null, null, null, null, Sender.Server, Status.ERROR, null, null, null);
             }
             sender.addMessageToQueue(changePasswordMessage);
-        } else if(getSender() == Sender.Server){
-            if ( getStatus() == Status.OK ){
+        } else if (getSender() == Sender.Server) {
+            if (getStatus() == Status.OK) {
                 UI.changedPasswordOK();
-            }else{
+            } else {
                 UI.changedPasswordERROR();
             }
         }

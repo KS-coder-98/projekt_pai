@@ -5,13 +5,13 @@ import java.net.ServerSocket;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EchoMultiServer{
+public class EchoMultiServer {
     private static ServerSocket socket;
     private static int port;
     private static List<EchoClientHandler> listUser;
 
 
-    public EchoMultiServer(int port){
+    public EchoMultiServer(int port) {
         EchoMultiServer.port = port;
         listUser = new ArrayList<>();
     }
@@ -19,7 +19,7 @@ public class EchoMultiServer{
     public static void run() {
         try {
             socket = new ServerSocket(port);
-            while (true){
+            while (true) {
                 EchoClientHandler echoClientHandle = new EchoClientHandler(socket.accept());
                 echoClientHandle.start();
                 listUser.add(echoClientHandle);

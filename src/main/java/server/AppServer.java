@@ -26,7 +26,7 @@ public class AppServer {
         communicationThread.setDaemon(true);
         communicationThread.start();
         int i = 0;
-        while (true){
+        while (true) {
             try {
                 Thread.sleep(10000);
             } catch (InterruptedException e) {

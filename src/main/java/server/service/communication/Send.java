@@ -12,12 +12,12 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
-public class Send extends Thread{
+public class Send extends Thread {
     private ObjectOutputStream out;
     List<Message> msgList;
 
 
-    public void send(Message msg){
+    public void send(Message msg) {
         try {
             out.writeObject(msg);
             out.flush();
@@ -32,10 +32,10 @@ public class Send extends Thread{
      */
     public void run() {
         while (true) {
-            if ( !msgList.isEmpty() ){
+            if (!msgList.isEmpty()) {
                 send(msgList.get(0));
                 msgList.remove(0);
-            }else
+            } else
                 try {
                     Thread.sleep(6000);
                 } catch (InterruptedException e) {
@@ -44,7 +44,7 @@ public class Send extends Thread{
         }
     }
 
-    public void addMessageToQueue(Message msg){
+    public void addMessageToQueue(Message msg) {
         msgList.add(msg);
     }
 }

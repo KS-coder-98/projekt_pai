@@ -13,7 +13,7 @@ import java.util.Collections;
 import java.util.List;
 
 @Getter
-public class EchoClient extends Thread{
+public class EchoClient extends Thread {
     private Socket clientSocket;
     private ObjectOutputStream out;
     private ObjectInputStream in;

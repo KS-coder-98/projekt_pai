@@ -19,7 +19,7 @@ public class XPathBookService {
 
     public XPathBookService(String pathToFile) {
         factory = DocumentBuilderFactory.newInstance();
-        factory.setNamespaceAware(true); // never forget this!
+        factory.setNamespaceAware(true);
         builder = null;
         try {
             builder = factory.newDocumentBuilder();
@@ -29,7 +29,7 @@ public class XPathBookService {
         }
     }
 
-    public List<String> getBooksByYear(int year)  {
+    public List<String> getBooksByYear(int year) {
         XPathFactory xpathfactory = XPathFactory.newInstance();
         XPath xpath = xpathfactory.newXPath();
         XPathExpression expr = null;
@@ -46,10 +46,10 @@ public class XPathBookService {
     public List<String> getBooksByAuthor(String author) {
         XPathFactory xpathfactory = XPathFactory.newInstance();
         XPath xpath = xpathfactory.newXPath();
-        try{
+        try {
             XPathExpression expr = xpath.compile("//book[author='" + author + "']/title/text()");
             return getNodeList(expr);
-        }catch (XPathExpressionException e){
+        } catch (XPathExpressionException e) {
             e.printStackTrace();
         }
         return null;

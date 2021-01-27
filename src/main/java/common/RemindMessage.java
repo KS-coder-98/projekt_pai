@@ -25,8 +25,7 @@ public class RemindMessage extends Message {
                 User foundUser = AppServer.list.stream().filter(user -> user.getLogin().equals(getLogin())).findFirst().get();
                 if (getStatus() == Status.CONTROL_QUESTION) {
                     remindMessage = new RemindMessage(foundUser.getLogin(), null, null, null, null, foundUser.getControlQuestion(), null, null, Sender.Server, Status.CONTROL_QUESTION, null, null, null);
-                }
-                else if (getStatus() == Status.ANSWER_TO_CONTROL_QUESTION && foundUser.getAnswerControlQuestion().equals(getAnswerControlQuestion())) {
+                } else if (getStatus() == Status.ANSWER_TO_CONTROL_QUESTION && foundUser.getAnswerControlQuestion().equals(getAnswerControlQuestion())) {
                     remindMessage = new RemindMessage(foundUser.getLogin(), foundUser.getPassword(), null, null, null, null, null, null, Sender.Server, Status.REMIND_PASSWORD_OK, null, null, null);
                 } else {
                     remindMessage = new RemindMessage(foundUser.getLogin(), null, null, null, null, null, null, null, Sender.Server, Status.REMIND_PASSWORD_ERROR, null, null, null);
@@ -38,9 +37,9 @@ public class RemindMessage extends Message {
                 String answer = UI.answerToControlQuestion(getControlQuestion());
                 remindMessage = new RemindMessage(getLogin(), null, null, null, null, null, answer, null, Sender.Client, Status.ANSWER_TO_CONTROL_QUESTION, null, null, null);
                 AppClient.client.getSend().addMessageToQueue(remindMessage);
-            }else if (getStatus() == Status.REMIND_PASSWORD_OK){
+            } else if (getStatus() == Status.REMIND_PASSWORD_OK) {
                 UI.showPassword(getPassword());
-            }else {
+            } else {
                 UI.showErrorRemindPassword();
             }
         }

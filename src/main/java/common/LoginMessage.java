@@ -25,10 +25,10 @@ public class LoginMessage extends Message {
                 loginMessageResponse = new LoginMessage(null, null, null, null, null, null, null, null, Sender.Server, Status.ERROR, null, null, null);
             }
             sender.addMessageToQueue(loginMessageResponse);
-        } else if(getSender() == Sender.Server){
-            if ( getStatus() == Status.OK ){
+        } else if (getSender() == Sender.Server) {
+            if (getStatus() == Status.OK) {
                 UI.logged();
-            }else{
+            } else {
                 UI.noLogIn();
             }
         }

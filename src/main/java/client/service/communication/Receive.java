@@ -5,7 +5,7 @@ import common.Message;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 
-public class Receive extends Thread{
+public class Receive extends Thread {
     ObjectInputStream in;
 
     public Receive(ObjectInputStream in) {
