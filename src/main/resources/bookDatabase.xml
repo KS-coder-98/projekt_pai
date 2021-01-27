@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <inventory>
-    <!--Test is test comment-->
     <book year="2000">
         <title>Snow Crash</title>
         <author>Neal Stephenson</author>
@@ -22,5 +21,26 @@
         <publisher>Spectra</publisher>
         <isbn>0553573862</isbn>
         <price>7.50</price>
+    </book>
+    <book year="2010">
+        <title>Przygody</title>
+        <author>Andrzej</author>
+        <publisher>Spectra</publisher>
+        <isbn>0553573862</isbn>
+        <price>7.53</price>
+    </book>
+    <book year="2015">
+        <title>Nowy rok</title>
+        <author>Marek</author>
+        <publisher>Spectra</publisher>
+        <isbn>3333573862</isbn>
+        <price>4.53</price>
+    </book>
+    <book year="2013">
+        <title>Nowy rok 2</title>
+        <author>Marek</author>
+        <publisher>Spectra</publisher>
+        <isbn>3333573862</isbn>
+        <price>4.53</price>
     </book>
 </inventory>
